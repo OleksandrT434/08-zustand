@@ -1,6 +1,7 @@
 
 import NoteForm from "@/components/NoteForm/NoteForm";
 import css from "./CreateNote.module.css";
+import { Metadata } from "next";
 
 export default function CreateNote() {
   return (
@@ -13,11 +14,9 @@ export default function CreateNote() {
   );
 }
 
-export async function generateMetadata() {
-    return {
+export const metadata: Metadata = {
         title: 'Create note',
         description: 'Create a new note in NoteHub',
-        url: 'https://notehub.com/notes/create',
         openGraph: {
             title: 'Create note',
             description: 'Create a new note in NoteHub',
@@ -32,4 +31,3 @@ export async function generateMetadata() {
             ]
         },
     }
-}
