@@ -1,3 +1,4 @@
+
 import css from './not-found.module.css';
 const NotFound = () => {
     return (
@@ -8,3 +9,14 @@ const NotFound = () => {
     );
 }
 export default NotFound;
+
+export const metadata = {
+    title: 'Page Not Found',
+    description: 'The page you are looking for does not exist.',
+    url: 'https://notehub.com/not-found',
+    openGraph: {
+        title: 'Page Not Found',
+        description: 'The page you are looking for does not exist.',
+        url: 'https://notehub.com/not-found',
+    }
+}

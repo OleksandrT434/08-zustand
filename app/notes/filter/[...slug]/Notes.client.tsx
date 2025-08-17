@@ -5,13 +5,12 @@ import css from './page.module.css';
 import Pagination from '@/components/Pagination/Pagination';
 import { useState } from 'react';
 import SearchBox from '@/components/SearchBox/SearchBox';
-import Modal from '@/components/Modal/Modal';
 import NoteList from '@/components/NoteList/NoteList';
 import { useQuery, keepPreviousData} from '@tanstack/react-query';
 import { fetchNotes} from '@/lib/api';
-import NoteForm from '@/components/NoteForm/NoteForm';
 import type { Note } from '@/types/note';
 import { useEffect } from 'react';
+import Link from 'next/link';
 
 interface PaginatedNotes {
   notes: Note[];
@@ -27,7 +26,6 @@ import { useDebouncedCallback } from 'use-debounce';
 
 export default function AppPage( { initialData, tag }: AppPageProps) {
   const [page, setPage] = useState(1);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [debouncedValue, setDebouncedValue] = useState('');
   
@@ -63,9 +61,9 @@ export default function AppPage( { initialData, tag }: AppPageProps) {
       <div className={css.app}>
       <header className={css.toolbar}>
           <SearchBox value={inputValue} onSearch={handleSearch} />
-        <button className={css.button} onClick={() => {setIsModalOpen(true)}}>
-        Create note +
-        </button>
+          <Link href="/notes/action/create" className={css.createBtn}>
+        + Create note
+      </Link>
         </header>
 
         {notes.length === 0 && <p>No notes found.</p>}
@@ -80,11 +78,6 @@ export default function AppPage( { initialData, tag }: AppPageProps) {
               />
             )} <NoteList notes={notes}/>
           </>
-        )}
-        {isModalOpen && (
-              <Modal onClose={() => setIsModalOpen(false)}>
-                <NoteForm onClose={() => setIsModalOpen(false)} />
-              </Modal>
         )}
       </div>
     );
